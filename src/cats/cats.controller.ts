@@ -1,3 +1,4 @@
+import { CacheTTL } from '@nestjs/cache-manager';
 import {
   Body,
   Controller,
@@ -9,6 +10,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { Public } from '../auth/decorators/public.decorator';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import { CatsService } from './cats.service';
@@ -28,11 +30,14 @@ export class CatsController {
   }
 
   @Get()
+  @Public()
   async findAll(): Promise<Cat[]> {
     return this.catsService.findAll();
   }
 
   @Get(':id')
+  @Public()
+  @CacheTTL(20000) // 20 seconds
   async findOne(@Param('id', new ParseIntPipe()) id: number): Promise<Cat> {
     const found = await this.catsService.findOne(id);
     if (!found) throw new NotFoundException();

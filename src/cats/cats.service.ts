@@ -22,10 +22,12 @@ export class CatsService {
   }
 
   async findAll(): Promise<Cat[]> {
+    console.log('findAll');
     return this.catsRepository.find();
   }
 
   async findOne(id: number): Promise<Cat | null> {
+    console.log('findOne', id);
     return this.catsRepository.findOneBy({ id: id });
   }
 
