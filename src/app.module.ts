@@ -1,8 +1,9 @@
+import { BullModule } from '@nestjs/bull';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
+import { AudioModule } from './audio/audio.module';
 import { CatsController } from './cats/cats.controller';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
@@ -11,6 +12,12 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '127.0.0.1',
@@ -23,8 +30,9 @@ import { UsersModule } from './users/users.module';
     }),
     CoreModule,
     UsersModule,
-    AuthModule,
+    // AuthModule,
     CatsModule,
+    AudioModule,
   ],
   controllers: [AppController],
   providers: [AppService],
