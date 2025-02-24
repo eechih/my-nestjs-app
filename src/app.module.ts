@@ -1,5 +1,6 @@
 import { BullModule } from '@nestjs/bull';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -9,6 +10,7 @@ import { CatsController } from './cats/cats.controller';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 import { CoreModule } from './core/core.module';
+import { ProductsModule } from './products/products.module';
 import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
 
@@ -20,6 +22,7 @@ import { UsersModule } from './users/users.module';
         port: 6379,
       },
     }),
+    EventEmitterModule.forRoot(),
     ScheduleModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -37,6 +40,7 @@ import { UsersModule } from './users/users.module';
     CatsModule,
     AudioModule,
     TasksModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
