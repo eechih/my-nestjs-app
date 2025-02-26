@@ -11,6 +11,7 @@ import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 import { ConfigModule } from './config/config.module';
 import { CoreModule } from './core/core.module';
+import { InvoicesModule } from './invoices/invoices.module';
 import { ProductsModule } from './products/products.module';
 import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
@@ -43,6 +44,7 @@ import { UsersModule } from './users/users.module';
     AudioModule,
     TasksModule,
     ProductsModule,
+    InvoicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
