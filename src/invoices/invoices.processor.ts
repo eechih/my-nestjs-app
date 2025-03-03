@@ -17,7 +17,7 @@ export class InvoicesProcessor {
     this.logger.debug('Start crawling...');
     this.logger.debug(job.data);
     const crawler = new Crawler();
-    await crawler.crawl();
+    // await crawler.crawl();
     this.logger.debug('Crawling completed');
     return job.data;
   }
